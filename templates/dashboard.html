@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Management Dashboard</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f5f7fb;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #1e3a8a;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      font-size: 1.5rem;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 1.5rem;
+      font-weight: 500;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    main {
+      padding: 2rem;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .card {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 1.5rem;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+    }
+    .card h2 {
+      color: #1e3a8a;
+      margin-bottom: 0.5rem;
+    }
+    .card p {
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Employee Management System</h1>
+    <nav>
+      <span>Welcome, {{ user.username }}!</span>
+      <a href="{% url 'logout' %}">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Dashboard</h2>
+    <p>Select an option below.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <h2>Employees</h2>
+        <p>Add, Remove and Manage Employee Records.</p>
+        <a href="/employees/">Open →</a>
+      </div>
+
+      <div class="card">
+        <h2>Departments</h2>
+        <p>Add, Remove and Manage Departments.</p>
+        <a href="/departments/">Open →</a>
+      </div>
+
+      <div class="card">
+        <h2>Projects</h2>
+        <p>Add, Remove and Manage Projects.</p>
+        <a href="/projects/">Open →</a>
+      </div>
+
+      <div class="card">
+        <h2>Employee Projects</h2>
+        <p>Assign employees to specific projects.</p>
+        <a href="/emp_projects/">Open →</a>
+      </div>
+
+      <div class="card">
+        <h2>Attendance</h2>
+        <p>Manage Employee Attendance.</p>
+        <a href="/attendance/">Open →</a>
+      </div>
+
+      <div class="card">
+        <h2>Leave Requests</h2>
+        <p>Manage Employee Leave Requests.</p>
+        <a href="/leave_request/">Open →</a>
+      </div>
+
+      <div class="card">
+        <h2>Payroll</h2>
+        <p>Manage, View Employee Payroll.</p>
+        <a href="/payroll/">Open →</a>
+      </div>
+
+      <div class="card">
+        <h2>Training</h2>
+        <p>View Training Courses.</p>
+        <a href="/training/">Open →</a>
+      </div>
+
+      <div class="card">
+        <h2>Employee Training</h2>
+        <p>Track Employees who are Enrolled in Training.</p>
+        <a href="/emp_training/">Open →</a>
+      </div>
+
+      <div class="card">
+        <h2>Performance Reviews</h2>
+        <p>Evaluate Employee Performance Reviews.</p>
+        <a href="/performance_review/">Open →</a>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>

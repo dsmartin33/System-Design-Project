@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Performance Review</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f6fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #1e3a8a;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 0.95em;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            max-width: 600px;
+            background-color: white;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #34495e;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        input, select, textarea {
+            padding: 8px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 4px rgba(52, 152, 219, 0.4);
+        }
+
+        .goal-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        button, a.button {
+            background-color: #db3434;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 4px;
+            font-size: 1em;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        a.button.secondary {
+            background-color: #1d4ed8;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Employee Management System</h1>
+        <nav>
+            <a href="/dashboard/">Dashboard</a>
+            <a href="/performance_review">Performance Review</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Add Performance Review</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+        <label>Employee</label>
+        <select name="EmpID">
+            {% for e in employees %}
+            <option value="{{ e.EmpID }}">{{ e.EmpID }} - {{ e.FirstName }} {{ e.LastName }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Manager</label>
+        <select name="ManagerID">
+            {% for e in employees %}
+            <option value="{{ e.EmpID }}">{{ e.EmpID }} - {{ e.FirstName }} {{ e.LastName }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Review Date</label>
+        <input type="date" name="ReviewDate">
+
+        <label>Rating (1-5)</label>
+        <input type="number" min="1" max="5" name="Rating">
+
+        <label>Comments</label>
+        <textarea name="Comments"></textarea>
+
+        <h3>Performance Goals</h3>
+
+        <div id="goal-container">
+            <div class="goal-row">
+                <input type="text" name="goals[]" placeholder="Enter goal...">
+            </div>
+        </div>
+
+        <button type="button" onclick="addGoal()">+ Add Another Goal</button>
+
+        <div class="buttons">
+            <button type="submit">Save Review</button>
+            <a href="{% url 'performance_review_list' %}" class="button secondary">Back to Performance Reviews</a>
+        </div>
+
+    </form>
+</main>
+
+<script>
+function addGoal() {
+    let container = document.getElementById('goal-container');
+    let row = document.createElement('div');
+    row.className = "goal-row";
+    row.innerHTML = `<input type="text" name="goals[]" placeholder="Enter goal...">`;
+    container.appendChild(row);
+}
+</script>
+</body>
+</html>

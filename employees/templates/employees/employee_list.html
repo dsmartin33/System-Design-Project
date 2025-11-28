@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Attendance</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f3f4f6;
+            padding: 40px;
+        }
+        h1 {
+            color: #111827;
+        }
+        .btn {
+            background: #1d4ed8;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            border-bottom: 1px solid #e5e7eb;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background: #1e3a8a;
+            color: white;
+        }
+        tr:hover {
+            background: #f1f5f9;
+        }
+        .delete-btn {
+            text-decoration: none;
+            color: white;
+            background: #d81d1d;
+            padding: 8px 14px;
+            border-radius: 5px;
+            font-weight: 500;
+        }
+        .back-btn {
+            background: #1d4ed8;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+            display: inline-block;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+  <div class="top-bar">
+    <h1>Employees</h1>
+    <a href="/employees/add/" class="btn">+ Add Employee</a>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>EmpID</th>
+        <th>Full Name</th>
+        <th>DoB</th>
+        <th>Gender</th>
+        <th>Job Title</th>
+        <th>Hire Date</th>
+        <th>Salary</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for emp in employees %}
+        <tr>
+          <td>{{ emp.EmpID }}</td>
+          <td>{{ emp.FirstName }} {{ emp.LastName }}</td>
+          <td>{{ emp.BirthDate }}</td>
+          <td>{{ emp.Gender }}</td>
+          <td>{{ emp.JobTitle }}</td>
+          <td>{{ emp.HireDate }}</td>
+          <td>{{ emp.Salary }}</td>
+          <td class="actions">
+            <a href="/employees/edit/{{ emp.EmpID }}/" class="btn">Edit</a>
+            <a href="/employees/delete/{{ emp.EmpID }}/" class="delete-btn">Delete</a>
+          </td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="7" style="text-align:center;">No employees found.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a href="/dashboard/" class="back-btn">← Back to Dashboard</a>
+</body>
+</html>
